@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.CurrentWeatherSceneController">
+   <children>
+      <ImageView fx:id="imageViewBackground" fitHeight="960.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="732.0" layoutY="473.0" mnemonicParsing="false" onAction="#searchAction" text="Search" />
+      <TextField fx:id="searchKeyword" layoutX="510.0" layoutY="473.0" promptText="Ex: &quot;Tampa&quot;" />
+      <Label fx:id="labelLastUpdated" alignment="CENTER" layoutX="511.0" layoutY="512.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageviewIcon" fitHeight="150.0" fitWidth="200.0" layoutX="544.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageViewIconDay1" fitHeight="70.0" fitWidth="77.0" layoutX="346.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageViewIconDay2" fitHeight="70.0" fitWidth="77.0" layoutX="576.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageViewIconDay3" fitHeight="70.0" fitWidth="77.0" layoutX="804.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1287.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToFavoritesScene" prefHeight="101.0" prefWidth="107.0" text="Favorites" />
+            <Button mnemonicParsing="false" onAction="#switchToExploreScene" prefHeight="101.0" prefWidth="107.0" text="Explore" />
+            <Button mnemonicParsing="false" prefHeight="101.0" prefWidth="107.0" text="Settings" />
+         </children>
+      </HBox>
+      <Button layoutX="385.0" layoutY="383.0" mnemonicParsing="false" onAction="#saveToFavorites" text="Save" />
+      <VBox layoutX="326.0" layoutY="651.0" prefHeight="173.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelDay1" text="Day 1" />
+            <Label fx:id="labelHighDay1" text="High:" />
+            <Label fx:id="labelLowDay1" text="Low:" />
+            <Label fx:id="labelAvgTempFDay1" text="Avg. Temperature:" />
+            <Label fx:id="labelAvgHumidityDay1" text="Average Humidity:" />
+            <Label fx:id="labelAvgVisMilesDay1" text="Avg. Visibility:" />
+            <Label fx:id="labelChanceofRainDay1" text="Chance of Rain:" />
+         </children>
+      </VBox>
+      <VBox layoutX="557.0" layoutY="651.0" prefHeight="189.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelDay2" text="Day 2" />
+            <Label fx:id="labelHighDay2" text="High:" />
+            <Label fx:id="labelLowDay2" text="Low:" />
+            <Label fx:id="labelAvgTempFDay2" text="Avg. Temperature:" />
+            <Label fx:id="labelAvgHumidityDay2" text="Average Humidity:" />
+            <Label fx:id="labelAvgVisMilesDay2" text="Avg. Visibility:" />
+            <Label fx:id="labelChanceofRainDay2" text="Chance of Rain:" />
+         </children>
+      </VBox>
+      <VBox layoutX="787.0" layoutY="651.0" prefHeight="189.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelDay3" text="Day 3" />
+            <Label fx:id="labelHighDay3" text="High:" />
+            <Label fx:id="labelLowDay3" text="Low:" />
+            <Label fx:id="labelAvgTempFDay3" text="Avg. Temperature:" />
+            <Label fx:id="labelAvgHumidityDay3" text="Average Humidity:" />
+            <Label fx:id="labelAvgVisMilesDay3" text="Avg. Visibility:" />
+            <Label fx:id="labelChanceofRainDay3" text="Chance of Rain:" />
+         </children>
+      </VBox>
+      <VBox layoutX="456.0" layoutY="278.0" prefHeight="181.0" prefWidth="262.0">
+         <children>
+            <Label fx:id="labelF" text="101.9°F">
+               <font>
+                  <Font size="72.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelCity" text="City">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelRegion" text="Region" />
+         </children>
+      </VBox>
+      <VBox layoutX="726.0" layoutY="286.0" prefHeight="166.0" prefWidth="224.0">
+         <children>
+            <Label fx:id="labelConditon" text="Condition" />
+            <Label fx:id="labelFeelsLikeF" text="Feels Like:" />
+            <Label fx:id="labelWindMPH" text="Wind MPH:" />
+            <Label fx:id="labelWindDir" text="Wind Dir:" />
+            <Label fx:id="labelHumidity" text="Humidity:" />
+            <Label fx:id="labelVisibility" text="Visibility:" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
