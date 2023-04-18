@@ -1,0 +1,7 @@
+{
+  "defaultLocation": "Naugatuck_Connecticut",
+  "tempUnit": "Fahrenheit",
+  "distanceUnit": "Miles",
+  "windSpeedUnit": "MPH",
+  "showForecast": "Yes"
+}

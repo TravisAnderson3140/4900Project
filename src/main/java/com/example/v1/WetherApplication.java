@@ -12,6 +12,7 @@ public class WetherApplication extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneCurrentWeather.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("weather.css");
         stage.setScene(scene);
         stage.show();
     }

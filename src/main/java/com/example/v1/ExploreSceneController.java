@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class ExploreSceneController {
     @FXML
@@ -56,14 +58,24 @@ public class ExploreSceneController {
     private ImageView iconCity3;
     @FXML
     private ImageView iconCity4;
+    private Settings settings;
+    private final SettingsReader settingsReader;
+    private final WeatherAPI weatherAPI;
+
     public void initialize() throws IOException, InterruptedException {
+        this.settings = settingsReader.readSettings();
         this.setExplorePage();
+    }
+    public ExploreSceneController() {
+        this.weatherAPI = new WeatherAPI();
+        this.settingsReader = new SettingsReader();
     }
     @FXML
     private void switchToCurrentWeatherScene(ActionEvent event) throws IOException {
         root = FXMLLoader.load(WetherApplication.class.getResource("SceneCurrentWeather.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        scene.getStylesheets().add("weather.css");
         stage.setScene(scene);
         stage.show();
     }
@@ -78,12 +90,95 @@ public class ExploreSceneController {
         reader.close();
 
         Collections.shuffle(listOfKeywords);
-        String[] arrayOfKeywords = listOfKeywords.toArray(new String[0]);
 
-        WeatherData weatherData1 = WeatherAPI.getData(arrayOfKeywords[0]);
-        WeatherData weatherData2 = WeatherAPI.getData(arrayOfKeywords[1]);
-        WeatherData weatherData3 = WeatherAPI.getData(arrayOfKeywords[2]);
-        WeatherData weatherData4 = WeatherAPI.getData(arrayOfKeywords[3]);
+        CompletableFuture<WeatherData> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                return WeatherAPI.getData(listOfKeywords.get(0));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        CompletableFuture<WeatherData> future2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                return WeatherAPI.getData(listOfKeywords.get(1));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        CompletableFuture<WeatherData> future3 = CompletableFuture.supplyAsync(() -> {
+            try {
+                return WeatherAPI.getData(listOfKeywords.get(2));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        CompletableFuture<WeatherData> future4 = CompletableFuture.supplyAsync(() -> {
+            try {
+                return WeatherAPI.getData(listOfKeywords.get(3));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
+        WeatherData weatherData1 = null;
+        try {
+            weatherData1 = future1.get();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            } else {
+                throw new RuntimeException(cause);
+            }
+        }
+
+        WeatherData weatherData2 = null;
+        try {
+            weatherData2 = future2.get();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            } else {
+                throw new RuntimeException(cause);
+            }
+        }
+
+        WeatherData weatherData3 = null;
+        try {
+            weatherData3 = future3.get();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            } else {
+                throw new RuntimeException(cause);
+            }
+        }
+
+        WeatherData weatherData4 = null;
+        try {
+            weatherData4 = future4.get();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            } else {
+                throw new RuntimeException(cause);
+            }
+        }
 
         this.labelCity1.setText(weatherData1.getLocation().getName());
         this.labelCity2.setText(weatherData2.getLocation().getName());
@@ -95,10 +190,17 @@ public class ExploreSceneController {
         this.labelRegion3.setText(weatherData3.getLocation().getRegion());
         this.labelRegion4.setText(weatherData4.getLocation().getRegion());
 
-        this.labelCity1Temp.setText(weatherData1.getCurrent().getTemp_f().toString() + "°F");
-        this.labelCity2Temp.setText(weatherData2.getCurrent().getTemp_f().toString() + "°F");
-        this.labelCity3Temp.setText(weatherData3.getCurrent().getTemp_f().toString() + "°F");
-        this.labelCity4Temp.setText(weatherData4.getCurrent().getTemp_f().toString() + "°F");
+        if (this.settings.getTempUnit().equals("Fahrenheit")) {
+            this.labelCity1Temp.setText(weatherData1.getCurrent().getTemp_f().toString() + "°F");
+            this.labelCity2Temp.setText(weatherData2.getCurrent().getTemp_f().toString() + "°F");
+            this.labelCity3Temp.setText(weatherData3.getCurrent().getTemp_f().toString() + "°F");
+            this.labelCity4Temp.setText(weatherData4.getCurrent().getTemp_f().toString() + "°F");
+        }else{
+            this.labelCity1Temp.setText(weatherData1.getCurrent().getTemp_c().toString() + "°C");
+            this.labelCity2Temp.setText(weatherData2.getCurrent().getTemp_c().toString() + "°C");
+            this.labelCity3Temp.setText(weatherData3.getCurrent().getTemp_c().toString() + "°C");
+            this.labelCity4Temp.setText(weatherData4.getCurrent().getTemp_c().toString() + "°C");
+        }
 
         this.iconCity1.setImage((new Image("http:" + weatherData1.getCurrent().getCondition().getIcon())));
         this.iconCity2.setImage((new Image("http:" + weatherData2.getCurrent().getCondition().getIcon())));
@@ -123,6 +225,7 @@ public class ExploreSceneController {
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        scene.getStylesheets().add("weather.css");
         stage.setScene(scene);
         stage.show();
     }

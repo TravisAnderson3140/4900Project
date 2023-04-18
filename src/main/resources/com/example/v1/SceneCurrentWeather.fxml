@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -20,51 +21,69 @@
          </font>
       </Label>
       <ImageView fx:id="imageviewIcon" fitHeight="150.0" fitWidth="200.0" layoutX="544.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageViewIconDay1" fitHeight="70.0" fitWidth="77.0" layoutX="346.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageViewIconDay2" fitHeight="70.0" fitWidth="77.0" layoutX="576.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageViewIconDay3" fitHeight="70.0" fitWidth="77.0" layoutX="804.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1287.0">
+      <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1280.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToFavoritesScene" prefHeight="101.0" prefWidth="107.0" text="Favorites" />
-            <Button mnemonicParsing="false" onAction="#switchToExploreScene" prefHeight="101.0" prefWidth="107.0" text="Explore" />
-            <Button mnemonicParsing="false" prefHeight="101.0" prefWidth="107.0" text="Settings" />
+            <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#switchToFavoritesScene" prefHeight="101.0" prefWidth="107.0" text="Favorites" />
+            <Button fx:id="buttonExplore" mnemonicParsing="false" onAction="#switchToExploreScene" prefHeight="101.0" prefWidth="107.0" text="Explore" />
+            <Button fx:id="buttonSettings" mnemonicParsing="false" onAction="#switchToSettingsScene" prefHeight="101.0" prefWidth="107.0" text="Settings" />
          </children>
       </HBox>
       <Button layoutX="385.0" layoutY="383.0" mnemonicParsing="false" onAction="#saveToFavorites" text="Save" />
-      <VBox layoutX="326.0" layoutY="651.0" prefHeight="173.0" prefWidth="200.0">
+      <VBox fx:id="vBoxForecastDay1" layoutX="292.0" layoutY="587.0" prefHeight="173.0" prefWidth="200.0">
          <children>
-            <Label fx:id="labelDay1" text="Day 1" />
+            <ImageView fx:id="imageViewIconDay1" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></ImageView>
+            <Label fx:id="labelDay1" text="Day 1">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></Label>
             <Label fx:id="labelHighDay1" text="High:" />
             <Label fx:id="labelLowDay1" text="Low:" />
-            <Label fx:id="labelAvgTempFDay1" text="Avg. Temperature:" />
+            <Label fx:id="labelAvgTempDay1" text="Avg. Temperature:" />
             <Label fx:id="labelAvgHumidityDay1" text="Average Humidity:" />
             <Label fx:id="labelAvgVisMilesDay1" text="Avg. Visibility:" />
             <Label fx:id="labelChanceofRainDay1" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox layoutX="557.0" layoutY="651.0" prefHeight="189.0" prefWidth="200.0">
+      <VBox fx:id="vBoxForecastDay2" layoutX="523.0" layoutY="587.0" prefHeight="189.0" prefWidth="200.0">
          <children>
-            <Label fx:id="labelDay2" text="Day 2" />
+            <ImageView fx:id="imageViewIconDay2" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></ImageView>
+            <Label fx:id="labelDay2" text="Day 2">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></Label>
             <Label fx:id="labelHighDay2" text="High:" />
             <Label fx:id="labelLowDay2" text="Low:" />
-            <Label fx:id="labelAvgTempFDay2" text="Avg. Temperature:" />
+            <Label fx:id="labelAvgTempDay2" text="Avg. Temperature:" />
             <Label fx:id="labelAvgHumidityDay2" text="Average Humidity:" />
             <Label fx:id="labelAvgVisMilesDay2" text="Avg. Visibility:" />
             <Label fx:id="labelChanceofRainDay2" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox layoutX="787.0" layoutY="651.0" prefHeight="189.0" prefWidth="200.0">
+      <VBox fx:id="vBoxForecastDay3" layoutX="753.0" layoutY="587.0" prefHeight="189.0" prefWidth="200.0">
          <children>
-            <Label fx:id="labelDay3" text="Day 3" />
+            <ImageView fx:id="imageViewIconDay3" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></ImageView>
+            <Label fx:id="labelDay3" text="Day 3">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></Label>
             <Label fx:id="labelHighDay3" text="High:" />
             <Label fx:id="labelLowDay3" text="Low:" />
-            <Label fx:id="labelAvgTempFDay3" text="Avg. Temperature:" />
+            <Label fx:id="labelAvgTempDay3" text="Avg. Temperature:" />
             <Label fx:id="labelAvgHumidityDay3" text="Average Humidity:" />
             <Label fx:id="labelAvgVisMilesDay3" text="Avg. Visibility:" />
             <Label fx:id="labelChanceofRainDay3" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox layoutX="456.0" layoutY="278.0" prefHeight="181.0" prefWidth="262.0">
+      <VBox fx:id="vBoxTemp" layoutX="456.0" layoutY="278.0" prefHeight="181.0" prefWidth="262.0">
          <children>
             <Label fx:id="labelF" text="101.9°F">
                <font>
@@ -77,13 +96,18 @@
                </font>
             </Label>
             <Label fx:id="labelRegion" text="Region" />
+            <Label fx:id="labelSaveStatus" alignment="CENTER" textAlignment="CENTER">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <VBox layoutX="726.0" layoutY="286.0" prefHeight="166.0" prefWidth="224.0">
+      <VBox fx:id="vBoxCurrent" layoutX="726.0" layoutY="286.0" prefHeight="166.0" prefWidth="224.0">
          <children>
             <Label fx:id="labelConditon" text="Condition" />
             <Label fx:id="labelFeelsLikeF" text="Feels Like:" />
-            <Label fx:id="labelWindMPH" text="Wind MPH:" />
+            <Label fx:id="labelWindSpeed" text="Wind MPH:" />
             <Label fx:id="labelWindDir" text="Wind Dir:" />
             <Label fx:id="labelHumidity" text="Humidity:" />
             <Label fx:id="labelVisibility" text="Visibility:" />

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -31,7 +32,7 @@ public class CurrentWeatherSceneController {
     @FXML
     private Label labelFeelsLikeF;
     @FXML
-    private Label labelWindMPH;
+    private Label labelWindSpeed;
     @FXML
     private Label labelWindDir;
     @FXML
@@ -61,11 +62,11 @@ public class CurrentWeatherSceneController {
     @FXML
     private Label labelLowDay3;
     @FXML
-    private Label labelAvgTempFDay1;
+    private Label labelAvgTempDay1;
     @FXML
-    private Label labelAvgTempFDay2;
+    private Label labelAvgTempDay2;
     @FXML
-    private Label labelAvgTempFDay3;
+    private Label labelAvgTempDay3;
     @FXML
     private Label labelAvgHumidityDay1;
     @FXML
@@ -92,14 +93,34 @@ public class CurrentWeatherSceneController {
     private ImageView imageViewIconDay3;
     @FXML
     private ImageView imageViewBackground;
+    @FXML
+    private VBox vBoxForecastDay1;
+    @FXML
+    private VBox vBoxForecastDay2;
+    @FXML
+    private VBox vBoxForecastDay3;
+    @FXML
+    private Label labelSaveStatus;
+    private Settings settings;
+    private final SettingsReader settingsReader = new SettingsReader();
     public void initialize() throws IOException, InterruptedException {
-        this.getCurrentData("29440");
-        this.getForecastData("29440");
+        this.settings = settingsReader.readSettings();
+        this.getCurrentData(settings.getDefaultLocation());
+        if (this.settings.getShowForecast().equals("Yes")) {
+            this.getForecastData(settings.getDefaultLocation());
+        }else{
+            this.vBoxForecastDay1.managedProperty().bind(vBoxForecastDay1.visibleProperty());
+            this.vBoxForecastDay1.setVisible(false);
+            this.vBoxForecastDay2.managedProperty().bind(vBoxForecastDay2.visibleProperty());
+            this.vBoxForecastDay2.setVisible(false);
+            this.vBoxForecastDay3.managedProperty().bind(vBoxForecastDay3.visibleProperty());
+            this.vBoxForecastDay3.setVisible(false);
+        }
     }
     public void getCurrentData(String keyword) throws IOException, InterruptedException {
         keyword = keyword.replaceAll(" ", "_");
         WeatherData wd = WeatherAPI.getData(keyword);
-        this.setCurrentF(wd);
+        this.setCurrentInfo(wd);
     }
 
     public void getForecastData(String keyword) throws IOException, InterruptedException {
@@ -109,50 +130,68 @@ public class CurrentWeatherSceneController {
     }
 
     public void setForecast(WeatherForecast forecast){
+        Label[] dayLabels = {labelDay1, labelDay2, labelDay3 };
+        ImageView[] dayIcons = {imageViewIconDay1, imageViewIconDay2, imageViewIconDay3 };
+        Label[] highTempLabels = {labelHighDay1, labelHighDay2, labelHighDay3 };
+        Label[] lowTempLabels = {labelLowDay1, labelLowDay2, labelLowDay3 };
+        Label[] avgTempLabels = {labelAvgTempDay1, labelAvgTempDay2, labelAvgTempDay3 };
+        Label[] avgHumidityLabels = {labelAvgHumidityDay1, labelAvgHumidityDay2, labelAvgHumidityDay3 };
+        Label[] avgVisMilesLabels = {labelAvgVisMilesDay1, labelAvgVisMilesDay2, labelAvgVisMilesDay3 };
+        Label[] chanceOfRainLabels = {labelChanceofRainDay1, labelChanceofRainDay2, labelChanceofRainDay3};
 
-        this.labelDay1.setText(getDayOfWeek(forecast.getForecast().getForecastday().get(0).getDate()));
-        this.labelDay2.setText(getDayOfWeek(forecast.getForecast().getForecastday().get(1).getDate()));
-        this.labelDay3.setText(getDayOfWeek(forecast.getForecast().getForecastday().get(2).getDate()));
-
-        this.imageViewIconDay1.setImage(new Image("http:" + forecast.getForecast().getForecastday().get(0).getHour().get(12).getCondition().getIcon()));
-        this.imageViewIconDay2.setImage(new Image("http:" + forecast.getForecast().getForecastday().get(1).getHour().get(12).getCondition().getIcon()));
-        this.imageViewIconDay3.setImage(new Image("http:" + forecast.getForecast().getForecastday().get(2).getHour().get(12).getCondition().getIcon()));
-
-        this.labelHighDay1.setText("High: " + forecast.getForecast().getForecastday().get(0).getDay().getMaxtemp_f().toString() + "°F");
-        this.labelHighDay2.setText("High: " + forecast.getForecast().getForecastday().get(1).getDay().getMaxtemp_f().toString() + "°F");
-        this.labelHighDay3.setText("High: " + forecast.getForecast().getForecastday().get(2).getDay().getMaxtemp_f().toString() + "°F");
-
-        this.labelLowDay1.setText("Low: " + forecast.getForecast().getForecastday().get(0).getDay().getMintemp_f().toString() + "°F");
-        this.labelLowDay2.setText("Low: " + forecast.getForecast().getForecastday().get(1).getDay().getMintemp_f().toString() + "°F");
-        this.labelLowDay3.setText("Low: " + forecast.getForecast().getForecastday().get(2).getDay().getMintemp_f().toString() + "°F");
-
-        this.labelAvgTempFDay1.setText("Avg: " + forecast.getForecast().getForecastday().get(0).getDay().getAvgtemp_f().toString() + "°F");
-        this.labelAvgTempFDay2.setText("Avg: " + forecast.getForecast().getForecastday().get(1).getDay().getAvgtemp_f().toString() + "°F");
-        this.labelAvgTempFDay3.setText("Avg: " + forecast.getForecast().getForecastday().get(2).getDay().getAvgtemp_f().toString() + "°F");
-
-        this.labelAvgHumidityDay1.setText("Humidity (Avg): " + forecast.getForecast().getForecastday().get(0).getDay().getAvghumidity().toString() + "%");
-        this.labelAvgHumidityDay2.setText("Humidity (Avg): " + forecast.getForecast().getForecastday().get(1).getDay().getAvghumidity().toString() + "%");
-        this.labelAvgHumidityDay3.setText("Humidity (Avg): " + forecast.getForecast().getForecastday().get(2).getDay().getAvghumidity().toString() + "%");
-
-        this.labelAvgVisMilesDay1.setText("Visibility (Avg): " + forecast.getForecast().getForecastday().get(0).getDay().getAvgvis_miles().toString() + " Mi.");
-        this.labelAvgVisMilesDay2.setText("Visibility (Avg): " + forecast.getForecast().getForecastday().get(1).getDay().getAvgvis_miles().toString() + " Mi.");
-        this.labelAvgVisMilesDay3.setText("Visibility (Avg): " + forecast.getForecast().getForecastday().get(2).getDay().getAvgvis_miles().toString() + " Mi.");
-
-        this.labelChanceofRainDay1.setText("Chance of Rain: " + forecast.getForecast().getForecastday().get(0).getDay().getDaily_chance_of_rain().toString() + "%");
-        this.labelChanceofRainDay2.setText("Chance of Rain: " + forecast.getForecast().getForecastday().get(1).getDay().getDaily_chance_of_rain().toString() + "%");
-        this.labelChanceofRainDay3.setText("Chance of Rain: " + forecast.getForecast().getForecastday().get(2).getDay().getDaily_chance_of_rain().toString() + "%");
+        for (int i = 0; i < 3; i++) {
+            dayLabels[i].setText(getDayOfWeek(forecast.getForecast().getForecastday().get(i).getDate()));
+            dayIcons[i].setImage(new Image("http:" + forecast.getForecast().getForecastday().get(i).getHour().get(12).getCondition().getIcon()));
+            avgHumidityLabels[i].setText("Humidity (Avg): " + forecast.getForecast().getForecastday().get(i).getDay().getAvghumidity().toString() + "%");
+            chanceOfRainLabels[i].setText("Chance of Rain: " + forecast.getForecast().getForecastday().get(i).getDay().getDaily_chance_of_rain() + "%");
+            if (this.settings.getTempUnit().equals("Fahrenheit")) {
+                highTempLabels[i].setText("High: " + forecast.getForecast().getForecastday().get(i).getDay().getMaxtemp_f().toString() + "°F");
+                lowTempLabels[i].setText("Low: " + forecast.getForecast().getForecastday().get(i).getDay().getMintemp_f().toString() + "°F");
+                avgTempLabels[i].setText("Avg: " + forecast.getForecast().getForecastday().get(i).getDay().getAvgtemp_f().toString() + "°F");
+            } else {
+                highTempLabels[i].setText("High: " + forecast.getForecast().getForecastday().get(i).getDay().getMaxtemp_c().toString() + "°C");
+                lowTempLabels[i].setText("Low: " + forecast.getForecast().getForecastday().get(i).getDay().getMintemp_c().toString() + "°C");
+                avgTempLabels[i].setText("Avg: " + forecast.getForecast().getForecastday().get(i).getDay().getAvgtemp_c().toString() + "°C");
+            }
+            if (this.settings.getDistanceUnit().equals("Miles")) {
+                avgVisMilesLabels[i].setText("Visibility (Avg): " + forecast.getForecast().getForecastday().get(i).getDay().getAvgvis_miles().toString() + " MI.");
+            } else {
+                avgVisMilesLabels[i].setText("Visibility (Avg): " + forecast.getForecast().getForecastday().get(i).getDay().getAvgvis_km().toString() + " KM.");
+            }
+        }
     }
-    private void setCurrentF(WeatherData wd) {
+    private void setCurrentInfo(WeatherData wd) {
         setBackground(wd);
-        this.labelF.setText(wd.getCurrent().getTemp_f().toString() + "°F");
+
+        if(settings.getTempUnit().equals("Fahrenheit")) {
+            this.labelF.setText(wd.getCurrent().getTemp_f().toString() + "°F");
+            this.labelFeelsLikeF.setText("Feels Like: " + (wd.getCurrent().getFeelslikeF().toString()) + "°F");
+        }else{
+            this.labelF.setText(wd.getCurrent().getTemp_c().toString() + "°C");
+            this.labelFeelsLikeF.setText("Feels Like: " + (wd.getCurrent().getFeelslike_c().toString() + "°C"));
+        }
+
+        if(settings.getDistanceUnit().equals("Miles")){
+            this.labelVisibility.setText("Visibility: " + wd.getCurrent().getVis_miles().toString() + " MI.");
+        }else{
+            this.labelVisibility.setText("Visibility: " + wd.getCurrent().getVis_km().toString() + " KM.");
+        }
+
+        switch (settings.getWindSpeedUnit()) {
+            case "MPH" -> this.labelWindSpeed.setText("Wind: " + wd.getCurrent().getWind_mph().toString() + " MPH");
+            case "KPH" -> this.labelWindSpeed.setText("Wind: " + wd.getCurrent().getWindKph().toString() + " KPH");
+            case "m/s" -> {
+                double windSpeedMps = wd.getCurrent().getWindKph() / 3.6; // convert to m/s
+                this.labelWindSpeed.setText(String.format("Wind: %.2f m/s", windSpeedMps));
+            }
+        }
+
+
         this.labelCity.setText(wd.getLocation().getName());
         this.labelRegion.setText(wd.getLocation().getRegion());
         this.labelConditon.setText(wd.getCurrent().getCondition().getText());
-        this.labelFeelsLikeF.setText("Feels Like: " + (wd.getCurrent().getFeelslikeF().toString()) + "°F");
-        this.labelWindMPH.setText("Wind: " + wd.getCurrent().getWind_mph().toString() + " MPH");
         this.labelWindDir.setText("Wind Dir: " + wd.getCurrent().getWind_dir());
         this.labelHumidity.setText("Humidity: " + wd.getCurrent().getHumidity().toString() + "%");
-        this.labelVisibility.setText("Visibility: " + wd.getCurrent().getVis_miles().toString() + " Mi.");
         this.labelLastUpdated.setText("Last Updated: " + wd.getCurrent().getLast_updated());
         this.imageviewIcon.setImage(new Image("http:" + wd.getCurrent().getCondition().getIcon()));
     }
@@ -168,10 +207,17 @@ public class CurrentWeatherSceneController {
         return dayOfWeek.toString();
     }
     @FXML
-    private void searchAction(ActionEvent event) throws IOException, InterruptedException {
+    private void searchAction(ActionEvent event) {
         String keyword = this.searchKeyword.getText();
-        this.getCurrentData(keyword);
-        this.getForecastData(keyword);
+
+        try {
+            this.getCurrentData(keyword);
+            this.getForecastData(keyword);
+        } catch (Exception e) {
+            this.labelLastUpdated.setText("Invalid keyword: " + keyword);
+            System.err.println(e.getMessage());
+        }
+
         this.searchKeyword.setText("");
     }
     @FXML
@@ -179,6 +225,7 @@ public class CurrentWeatherSceneController {
         Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneExplore.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        scene.getStylesheets().add("weather.css");
         stage.setScene(scene);
         stage.show();
     }
@@ -187,6 +234,16 @@ public class CurrentWeatherSceneController {
         Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneFavorites.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        scene.getStylesheets().add("weather.css");
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void switchToSettingsScene(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneSettings.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add("weather.css");
         stage.setScene(scene);
         stage.show();
     }
@@ -197,34 +254,34 @@ public class CurrentWeatherSceneController {
 
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("src/main/resources/favorites.txt", true);
+            fileWriter = new FileWriter("data/favorites.txt", true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/favorites.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("data/favorites.txt"));
         String line;
         int lineCount = 0;
 
         while ((line = reader.readLine()) != null) {
             lineCount++;
-            System.out.println("line count: " + lineCount);
             // Check if the keyword already exists in the file
             if (line.equals(keyword)) {
-                System.out.println("Location already saved to favorites!");
+                this.labelSaveStatus.setText("Location already saved to favorites!");
                 reader.close();
                 return; // keyword already exists
             }
         }
 
         if(lineCount >= 4){
-            System.out.println("Favorites full. Remove a location before saving a new one.");
+            this.labelSaveStatus.setText("Error, Favorites list is full.");
             reader.close();
             return;
         }
 
         reader.close();
         fileWriter.write(keyword + "\n");
+        this.labelSaveStatus.setText("Location saved to Favorites!");
         fileWriter.flush();
         fileWriter.close();
     }
