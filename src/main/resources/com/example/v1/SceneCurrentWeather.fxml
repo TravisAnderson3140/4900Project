@@ -4,23 +4,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.CurrentWeatherSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../weather.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.CurrentWeatherSceneController">
    <children>
       <ImageView fx:id="imageViewBackground" fitHeight="960.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="732.0" layoutY="473.0" mnemonicParsing="false" onAction="#searchAction" text="Search" />
-      <TextField fx:id="searchKeyword" layoutX="510.0" layoutY="473.0" promptText="Ex: &quot;Tampa&quot;" />
-      <Label fx:id="labelLastUpdated" alignment="CENTER" layoutX="511.0" layoutY="512.0" text="Label" textAlignment="CENTER">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="imageviewIcon" fitHeight="150.0" fitWidth="200.0" layoutX="544.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
       <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1280.0">
          <children>
             <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#switchToFavoritesScene" prefHeight="101.0" prefWidth="107.0" text="Favorites" />
@@ -28,8 +22,7 @@
             <Button fx:id="buttonSettings" mnemonicParsing="false" onAction="#switchToSettingsScene" prefHeight="101.0" prefWidth="107.0" text="Settings" />
          </children>
       </HBox>
-      <Button layoutX="385.0" layoutY="383.0" mnemonicParsing="false" onAction="#saveToFavorites" text="Save" />
-      <VBox fx:id="vBoxForecastDay1" layoutX="292.0" layoutY="587.0" prefHeight="173.0" prefWidth="200.0">
+      <VBox fx:id="vBoxForecastDay1" layoutX="310.0" layoutY="629.0" prefHeight="173.0" prefWidth="200.0" stylesheets="@../../../weather.css">
          <children>
             <ImageView fx:id="imageViewIconDay1" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
@@ -43,11 +36,11 @@
             <Label fx:id="labelLowDay1" text="Low:" />
             <Label fx:id="labelAvgTempDay1" text="Avg. Temperature:" />
             <Label fx:id="labelAvgHumidityDay1" text="Average Humidity:" />
-            <Label fx:id="labelAvgVisMilesDay1" text="Avg. Visibility:" />
+            <Label fx:id="labelAvgVisDay1" text="Avg. Visibility:" />
             <Label fx:id="labelChanceofRainDay1" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox fx:id="vBoxForecastDay2" layoutX="523.0" layoutY="587.0" prefHeight="189.0" prefWidth="200.0">
+      <VBox fx:id="vBoxForecastDay2" layoutX="541.0" layoutY="629.0" prefHeight="189.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="imageViewIconDay2" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
@@ -61,11 +54,11 @@
             <Label fx:id="labelLowDay2" text="Low:" />
             <Label fx:id="labelAvgTempDay2" text="Avg. Temperature:" />
             <Label fx:id="labelAvgHumidityDay2" text="Average Humidity:" />
-            <Label fx:id="labelAvgVisMilesDay2" text="Avg. Visibility:" />
+            <Label fx:id="labelAvgVisDay2" text="Avg. Visibility:" />
             <Label fx:id="labelChanceofRainDay2" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox fx:id="vBoxForecastDay3" layoutX="753.0" layoutY="587.0" prefHeight="189.0" prefWidth="200.0">
+      <VBox fx:id="vBoxForecastDay3" layoutX="771.0" layoutY="629.0" prefHeight="189.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="imageViewIconDay3" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
@@ -79,39 +72,215 @@
             <Label fx:id="labelLowDay3" text="Low:" />
             <Label fx:id="labelAvgTempDay3" text="Avg. Temperature:" />
             <Label fx:id="labelAvgHumidityDay3" text="Average Humidity:" />
-            <Label fx:id="labelAvgVisMilesDay3" text="Avg. Visibility:" />
+            <Label fx:id="labelAvgVisDay3" text="Avg. Visibility:" />
             <Label fx:id="labelChanceofRainDay3" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox fx:id="vBoxTemp" layoutX="456.0" layoutY="278.0" prefHeight="181.0" prefWidth="262.0">
+      <VBox layoutX="971.0" layoutY="100.0" prefHeight="490.0" prefWidth="175.0">
          <children>
-            <Label fx:id="labelF" text="101.9°F">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCity" text="City">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelRegion" text="Region" />
-            <Label fx:id="labelSaveStatus" alignment="CENTER" textAlignment="CENTER">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Label>
+            <StackPane fx:id="feelsLikeSP" prefHeight="150.0" prefWidth="175.0">
+               <children>
+                  <Label id="feelsLikeTitle" text="FEELS LIKE" StackPane.alignment="TOP_LEFT" />
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+                     <image>
+                        <Image url="@feels%20like.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="feelsLikeRectangle1" arcHeight="5.0" arcWidth="5.0" fill="#bec4c9" height="15.0" stroke="BLACK" strokeType="INSIDE" width="120.0" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets left="20.0" />
+                     </StackPane.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="feelsLikeRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="120.0" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets left="20.0" />
+                     </StackPane.margin>
+                  </Rectangle>
+                  <Label id="feelsLike0" text="0°" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </Label>
+                  <Label id="feelsLike120" text="120°" StackPane.alignment="BOTTOM_RIGHT">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+                  <Label fx:id="labelFeelsLike" alignment="CENTER" text="Feels Like:">
+                     </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </StackPane>
+            <StackPane fx:id="precipSP" prefHeight="150.0" prefWidth="175.0">
+               <children>
+                  <Label id="precipitationTitle" text="RAIN" StackPane.alignment="TOP_LEFT" />
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+                     <image>
+                        <Image url="@rain.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelPrecip" text="Precip:">
+                     </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </StackPane>
+            <StackPane fx:id="windSP" prefHeight="150.0" prefWidth="175.0">
+               <children>
+                  <Label id="windTitle" text="WIND" StackPane.alignment="TOP_LEFT" />
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+                     <image>
+                        <Image url="@wind.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </ImageView>
+                  <Label fx:id="labelWindSpeed" text="W MPH:">
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </Label>
+                  <Label fx:id="labelWindDir" text="Wind Dir:">
+                     <StackPane.margin>
+                        <Insets top="50.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
          </children>
       </VBox>
-      <VBox fx:id="vBoxCurrent" layoutX="726.0" layoutY="286.0" prefHeight="166.0" prefWidth="224.0">
+      <VBox layoutX="762.0" layoutY="100.0" prefHeight="490.0" prefWidth="175.0">
          <children>
-            <Label fx:id="labelConditon" text="Condition" />
-            <Label fx:id="labelFeelsLikeF" text="Feels Like:" />
-            <Label fx:id="labelWindSpeed" text="Wind MPH:" />
-            <Label fx:id="labelWindDir" text="Wind Dir:" />
-            <Label fx:id="labelHumidity" text="Humidity:" />
-            <Label fx:id="labelVisibility" text="Visibility:" />
+            <StackPane fx:id="uvSP" prefHeight="150.0" prefWidth="175.0">
+               <children>
+                  <Label id="uvIndexTitle" text="UV INDEX" StackPane.alignment="TOP_LEFT" />
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+                     <image>
+                        <Image url="@uv%20index.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelUV" text="UV:" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </StackPane>
+            <StackPane fx:id="visibilitySP" prefHeight="150.0" prefWidth="175.0">
+               <children>
+                  <Label id="visibilityTitle" text="VISIBILITY" StackPane.alignment="TOP_LEFT" />
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+                     <image>
+                        <Image url="@visibility.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelVisibility" text="Visibility:">
+                     </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </StackPane>
+            <StackPane fx:id="humiditySP" prefHeight="150.0" prefWidth="175.0">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+                     <image>
+                        <Image url="@humidity.png" />
+                     </image>
+                  </ImageView>
+                  <Label id="humidityTitle" text="HUMIDITY" StackPane.alignment="TOP_LEFT" />
+                  <Label fx:id="labelHumidity" text="Humidity:">
+                     </Label>
+                  <Rectangle fx:id="feelsLikeRectangle11" arcHeight="5.0" arcWidth="5.0" fill="#bec4c9" height="15.0" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets left="25.0" />
+                     </StackPane.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="humidityRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets left="25.0" />
+                     </StackPane.margin>
+                  </Rectangle>
+                  <Label id="humidity0" text="0%" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin>
+                  </Label>
+                  <Label id="humidity100" text="100%" StackPane.alignment="BOTTOM_RIGHT">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
          </children>
       </VBox>
+      <StackPane fx:id="currentSP" layoutX="135.0" layoutY="100.0" prefHeight="490.0" prefWidth="550.0" stylesheets="@../../../weather.css">
+         <children>
+            <Label fx:id="labelF" text="101.9°F" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets top="75.0" />
+               </StackPane.margin></Label>
+            <Label fx:id="labelCity" text="City" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
+               <StackPane.margin>
+                  <Insets left="20.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="labelRegion" alignment="CENTER" text="Region" StackPane.alignment="TOP_LEFT">
+               <StackPane.margin>
+                  <Insets left="20.0" top="55.0" />
+               </StackPane.margin>
+            </Label>
+            <Label id="saveStatus" fx:id="labelSaveStatus" alignment="CENTER" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets top="35.0" />
+               </StackPane.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#saveToFavorites" text="Save" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </Button>
+            <Label fx:id="labelLastUpdated" alignment="CENTER" textAlignment="CENTER" StackPane.alignment="BOTTOM_RIGHT">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </Label>
+            <TextField fx:id="searchKeyword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="203.0" promptText="Ex: &quot;Tampa&quot;" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="60.0" right="40.0" />
+               </StackPane.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#searchAction" text="Search" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="60.0" left="266.0" right="40.0" />
+               </StackPane.margin>
+            </Button>
+            <Label fx:id="labelCondition" alignment="CENTER_RIGHT" text="Condition" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets bottom="50.0" />
+               </StackPane.margin>
+            </Label>
+            <ImageView fx:id="imageviewIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets bottom="150.0" />
+               </StackPane.margin></ImageView>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

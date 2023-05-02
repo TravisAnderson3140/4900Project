@@ -10,7 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -28,9 +30,9 @@ public class CurrentWeatherSceneController {
     @FXML
     private TextField searchKeyword;
     @FXML
-    private Label labelConditon;
+    private Label labelCondition;
     @FXML
-    private Label labelFeelsLikeF;
+    private Label labelFeelsLike;
     @FXML
     private Label labelWindSpeed;
     @FXML
@@ -39,6 +41,10 @@ public class CurrentWeatherSceneController {
     private Label labelHumidity;
     @FXML
     private Label labelVisibility;
+    @FXML
+    private Label labelUV;
+    @FXML
+    private Label labelPrecip;
     @FXML
     private Label labelLastUpdated;
     @FXML
@@ -74,11 +80,11 @@ public class CurrentWeatherSceneController {
     @FXML
     private Label labelAvgHumidityDay3;
     @FXML
-    private Label labelAvgVisMilesDay1;
+    private Label labelAvgVisDay1;
     @FXML
-    private Label labelAvgVisMilesDay2;
+    private Label labelAvgVisDay2;
     @FXML
-    private Label labelAvgVisMilesDay3;
+    private Label labelAvgVisDay3;
     @FXML
     private Label labelChanceofRainDay1;
     @FXML
@@ -101,6 +107,18 @@ public class CurrentWeatherSceneController {
     private VBox vBoxForecastDay3;
     @FXML
     private Label labelSaveStatus;
+    @FXML
+    private Rectangle feelsLikeRectangle;
+    @FXML
+    private Rectangle humidityRectangle;
+    @FXML
+    private StackPane feelsLikeSP;
+    @FXML
+    private StackPane precipSP;
+    @FXML
+    private StackPane humiditySP;
+    @FXML
+    private StackPane windSP;
     private Settings settings;
     private final SettingsReader settingsReader = new SettingsReader();
     public void initialize() throws IOException, InterruptedException {
@@ -136,7 +154,7 @@ public class CurrentWeatherSceneController {
         Label[] lowTempLabels = {labelLowDay1, labelLowDay2, labelLowDay3 };
         Label[] avgTempLabels = {labelAvgTempDay1, labelAvgTempDay2, labelAvgTempDay3 };
         Label[] avgHumidityLabels = {labelAvgHumidityDay1, labelAvgHumidityDay2, labelAvgHumidityDay3 };
-        Label[] avgVisMilesLabels = {labelAvgVisMilesDay1, labelAvgVisMilesDay2, labelAvgVisMilesDay3 };
+        Label[] avgVisMilesLabels = {labelAvgVisDay1, labelAvgVisDay2, labelAvgVisDay3};
         Label[] chanceOfRainLabels = {labelChanceofRainDay1, labelChanceofRainDay2, labelChanceofRainDay3};
 
         for (int i = 0; i < 3; i++) {
@@ -165,33 +183,44 @@ public class CurrentWeatherSceneController {
 
         if(settings.getTempUnit().equals("Fahrenheit")) {
             this.labelF.setText(wd.getCurrent().getTemp_f().toString() + "°F");
-            this.labelFeelsLikeF.setText("Feels Like: " + (wd.getCurrent().getFeelslikeF().toString()) + "°F");
+            this.labelFeelsLike.setText(wd.getCurrent().getFeelslikeF().toString() + "°F");
+            this.feelsLikeRectangle.setWidth(wd.getCurrent().getFeelslikeF());
         }else{
             this.labelF.setText(wd.getCurrent().getTemp_c().toString() + "°C");
-            this.labelFeelsLikeF.setText("Feels Like: " + (wd.getCurrent().getFeelslike_c().toString() + "°C"));
+            this.labelFeelsLike.setText(wd.getCurrent().getFeelslike_c().toString() + "°C");
+            this.feelsLikeRectangle.setWidth(wd.getCurrent().getFeelslike_c());
         }
 
         if(settings.getDistanceUnit().equals("Miles")){
-            this.labelVisibility.setText("Visibility: " + wd.getCurrent().getVis_miles().toString() + " MI.");
+            this.labelVisibility.setText(wd.getCurrent().getVis_miles().toString() + " MI.");
         }else{
-            this.labelVisibility.setText("Visibility: " + wd.getCurrent().getVis_km().toString() + " KM.");
+            this.labelVisibility.setText(wd.getCurrent().getVis_km().toString() + " KM.");
+        }
+
+        if(settings.getRainfallUnit().equals("in.")){
+            this.labelPrecip.setText(wd.getCurrent().getPrecip_in().toString() + " in.");
+        }else{
+            this.labelPrecip.setText(wd.getCurrent().getPrecipMm().toString() + " mm.");
         }
 
         switch (settings.getWindSpeedUnit()) {
-            case "MPH" -> this.labelWindSpeed.setText("Wind: " + wd.getCurrent().getWind_mph().toString() + " MPH");
-            case "KPH" -> this.labelWindSpeed.setText("Wind: " + wd.getCurrent().getWindKph().toString() + " KPH");
+            case "MPH" -> this.labelWindSpeed.setText(wd.getCurrent().getWind_mph().toString() + " MPH");
+            case "KPH" -> this.labelWindSpeed.setText(wd.getCurrent().getWindKph().toString() + " KPH");
             case "m/s" -> {
                 double windSpeedMps = wd.getCurrent().getWindKph() / 3.6; // convert to m/s
-                this.labelWindSpeed.setText(String.format("Wind: %.2f m/s", windSpeedMps));
+                this.labelWindSpeed.setText(String.format(" %.2f m/s", windSpeedMps));
             }
         }
 
-
-        this.labelCity.setText(wd.getLocation().getName());
+        this.labelUV.setText(wd.getCurrent().getUv().toString());
+        this.labelCity.setText(wd.getLocation().getName() + ",");
         this.labelRegion.setText(wd.getLocation().getRegion());
-        this.labelConditon.setText(wd.getCurrent().getCondition().getText());
-        this.labelWindDir.setText("Wind Dir: " + wd.getCurrent().getWind_dir());
-        this.labelHumidity.setText("Humidity: " + wd.getCurrent().getHumidity().toString() + "%");
+        this.labelCondition.setText(wd.getCurrent().getCondition().getText());
+        this.labelWindDir.setText(wd.getCurrent().getWind_dir());
+
+        this.labelHumidity.setText(wd.getCurrent().getHumidity().toString() + "%");
+        this.humidityRectangle.setWidth(wd.getCurrent().getHumidity());
+
         this.labelLastUpdated.setText("Last Updated: " + wd.getCurrent().getLast_updated());
         this.imageviewIcon.setImage(new Image("http:" + wd.getCurrent().getCondition().getIcon()));
     }
@@ -249,7 +278,7 @@ public class CurrentWeatherSceneController {
     }
     @FXML
     private void saveToFavorites(ActionEvent event) throws IOException {
-        String keyword = this.labelCity.getText().replaceAll(" ", "_") + "_" +
+        String keyword = this.labelCity.getText().replaceAll(" ", "_").replaceAll(",", "") + "_" +
                 this.labelRegion.getText().replaceAll(" ", "_");
 
         FileWriter fileWriter = null;

@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 public class WeatherAPI {
     private static final String API_URL = "http://api.weatherapi.com/v1/";
-    private static final String API_KEY = "YOUR_API_KEY";
+    private static final String API_KEY = "YOUR-API-KEY-HERE";
     public static WeatherData getData(String keyword) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest GetRequest = HttpRequest.newBuilder()

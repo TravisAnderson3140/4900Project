@@ -11,46 +11,47 @@ import java.io.*;
         public String distanceUnit;
         public String windSpeedUnit;
         public String showForecast;
-        public Settings(String defaultLocation, String unit, String distanceUnit, String windSpeedUnit, String showForecast) {
+        public String rainfallUnit;
+        public Settings(String defaultLocation, String unit, String distanceUnit, String windSpeedUnit, String showForecast, String rainfallUnit) {
             this.defaultLocation = defaultLocation;
             this.tempUnit = unit;
             this.distanceUnit = distanceUnit;
             this.windSpeedUnit = windSpeedUnit;
             this.showForecast = showForecast;
+            this.rainfallUnit = rainfallUnit;
         }
+
+        public String getRainfallUnit() {return rainfallUnit;}
+        public void setRainfallUnit(String rainfallUnit) {this.rainfallUnit = rainfallUnit;}
         public String getShowForecast() {
             return showForecast;
         }
-
         public void setShowForecast(String showForecast) {
             this.showForecast = showForecast;
         }
-
         public String getWindSpeedUnit() {
             return windSpeedUnit;
         }
-
         public void setWindSpeedUnit(String windSpeedUnit) {
             this.windSpeedUnit = windSpeedUnit;
         }
         public String getDefaultLocation() {
             return defaultLocation;
         }
-
         public String getTempUnit() {
             return tempUnit;
         }
-
         public String getDistanceUnit() { return distanceUnit;}
         public void setDistanceUnit(String distanceUnit) { this.distanceUnit = distanceUnit; }
-
         public void setDefaultLocation(String defaultLocation) {
             this.defaultLocation = defaultLocation;
         }
-
         public void setTempUnit(String tempUnit) {
             this.tempUnit = tempUnit;
         }
+
+
+
 
         public static Settings loadSettings() {
             try {

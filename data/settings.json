@@ -1,7 +1,8 @@
 {
-  "defaultLocation": "Naugatuck_Connecticut",
+  "defaultLocation": "Georgetown_South_Carolina",
   "tempUnit": "Fahrenheit",
   "distanceUnit": "Miles",
   "windSpeedUnit": "MPH",
-  "showForecast": "Yes"
+  "showForecast": "Yes",
+  "rainfallUnit": "in."
 }

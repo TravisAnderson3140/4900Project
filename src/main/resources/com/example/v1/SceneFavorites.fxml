@@ -1,82 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="960.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.FavoritesSceneController">
+<AnchorPane id="anchorPaneFavorites" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../weather.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.FavoritesSceneController">
    <children>
-      <VBox fx:id="weatherTile1" layoutX="329.0" layoutY="294.0" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
-         <children>
-            <Label fx:id="labelCity1Temp">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCity1">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelRegion1" />
-            <Button fx:id="buttonDelete1" mnemonicParsing="false" text="Delete" />
-         </children>
-      </VBox>
-      <VBox fx:id="weatherTile2" layoutX="737.0" layoutY="294.0" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
-         <children>
-            <Label fx:id="labelCity2Temp">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCity2">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelRegion2" />
-            <Button fx:id="buttonDelete2" mnemonicParsing="false" text="Delete" />
-         </children>
-      </VBox>
-      <VBox fx:id="weatherTile3" layoutX="329.0" layoutY="509.0" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
-         <children>
-            <Label fx:id="labelCity3Temp">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCity3">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelRegion3" />
-            <Button fx:id="buttonDelete3" mnemonicParsing="false" text="Delete" />
-         </children>
-      </VBox>
-      <VBox fx:id="weatherTile4" layoutX="737.0" layoutY="509.0" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
-         <children>
-            <Label fx:id="labelCity4Temp">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCity4">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelRegion4" />
-            <Button fx:id="buttonDelete4" mnemonicParsing="false" text="Delete" />
-         </children>
-      </VBox>
       <Button layoutX="585.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToCurrentWeatherScene" text="Return Home" />
-      <ImageView fx:id="iconCity1" fitHeight="105.0" fitWidth="119.0" layoutX="210.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="iconCity2" fitHeight="105.0" fitWidth="119.0" layoutX="618.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="iconCity3" fitHeight="105.0" fitWidth="119.0" layoutX="210.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="iconCity4" fitHeight="105.0" fitWidth="119.0" layoutX="618.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true" />
+      <StackPane id="favoritesTile1" fx:id="favoritesTile1" layoutX="169.0" layoutY="192.0" prefHeight="245.0" prefWidth="420.0">
+         <children>
+            <VBox fx:id="weatherTile1" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
+               <children>
+                  <Label fx:id="labelCity1Temp">
+                     <font>
+                        <Font size="72.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelCity1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelRegion1" />
+                  <Button fx:id="buttonDelete1" mnemonicParsing="false" text="Delete">
+                     <VBox.margin>
+                        <Insets left="300.0" top="20.0" />
+                     </VBox.margin></Button>
+               </children>
+               <StackPane.margin>
+                  <Insets left="25.0" />
+               </StackPane.margin>
+            </VBox>
+            <ImageView fx:id="iconCity1" fitHeight="105.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </StackPane.margin></ImageView>
+         </children>
+      </StackPane>
+      <StackPane id="favoritesTile2" fx:id="favoritesTile2" layoutX="690.0" layoutY="192.0" prefHeight="245.0" prefWidth="420.0">
+         <children>
+            <ImageView fx:id="iconCity2" fitHeight="105.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </StackPane.margin></ImageView>
+            <VBox fx:id="weatherTile2" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
+               <children>
+                  <Label fx:id="labelCity2Temp">
+                     <font>
+                        <Font size="72.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelCity2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelRegion2" />
+                  <Button fx:id="buttonDelete2" mnemonicParsing="false" text="Delete">
+                     <VBox.margin>
+                        <Insets left="300.0" top="20.0" />
+                     </VBox.margin></Button>
+               </children>
+               <StackPane.margin>
+                  <Insets left="25.0" />
+               </StackPane.margin>
+            </VBox>
+         </children>
+      </StackPane>
+      <StackPane id="favoritesTile3" fx:id="favoritesTile3" layoutX="165.0" layoutY="543.0" prefHeight="245.0" prefWidth="420.0">
+         <children>
+            <VBox fx:id="weatherTile3" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
+               <children>
+                  <Label fx:id="labelCity3Temp">
+                     <font>
+                        <Font size="72.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelCity3">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelRegion3" />
+                  <Button fx:id="buttonDelete3" mnemonicParsing="false" text="Delete">
+                     <VBox.margin>
+                        <Insets left="300.0" top="20.0" />
+                     </VBox.margin></Button>
+               </children>
+               <StackPane.margin>
+                  <Insets left="25.0" />
+               </StackPane.margin>
+            </VBox>
+            <ImageView fx:id="iconCity3" fitHeight="105.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </StackPane.margin></ImageView>
+         </children>
+      </StackPane>
+      <StackPane id="favoritesTile4" fx:id="favoritesTile4" layoutX="690.0" layoutY="543.0" prefHeight="245.0" prefWidth="420.0">
+         <children>
+            <VBox fx:id="weatherTile4" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
+               <children>
+                  <Label fx:id="labelCity4Temp">
+                     <font>
+                        <Font size="72.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelCity4">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelRegion4" />
+                  <Button fx:id="buttonDelete4" mnemonicParsing="false" text="Delete">
+                     <VBox.margin>
+                        <Insets left="300.0" top="20.0" />
+                     </VBox.margin></Button>
+               </children>
+               <StackPane.margin>
+                  <Insets left="25.0" />
+               </StackPane.margin>
+            </VBox>
+            <ImageView fx:id="iconCity4" fitHeight="105.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </StackPane.margin></ImageView>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

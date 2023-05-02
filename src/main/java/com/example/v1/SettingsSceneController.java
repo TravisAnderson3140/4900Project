@@ -26,6 +26,8 @@ public class SettingsSceneController {
             private ChoiceBox<String> windSpeedUnitChoiceBox;
             @FXML
             private ChoiceBox<String> showForecastChoiceBox;
+            @FXML
+            private ChoiceBox<String> rainfallUnitChoiceBox;
             private Stage stage;
             private Scene scene;
             private Parent root;
@@ -38,13 +40,15 @@ public class SettingsSceneController {
             public void initialize() {
                 settings = Settings.loadSettings();
                 if (settings == null) {
-                    settings = new Settings("80108", "Celsius", "Miles", "MPH", "Yes");
+                    settings = new Settings("80108", "Celsius", "Miles", "MPH", "Yes", "in.");
                 }
                 locationChoiceBox.setValue(settings.getDefaultLocation());
                 tempUnitChoiceBox.setValue(settings.getTempUnit());
                 distanceChoiceBox.setValue(settings.getDistanceUnit());
                 windSpeedUnitChoiceBox.setValue(settings.getWindSpeedUnit());
                 showForecastChoiceBox.setValue(settings.getShowForecast());
+                rainfallUnitChoiceBox.setValue(settings.getRainfallUnit());
+
                 ObservableList<String> locationChoices = FXCollections.observableArrayList();
 
                 try (BufferedReader br = new BufferedReader(new FileReader("data/favorites.txt"))) {
@@ -68,6 +72,9 @@ public class SettingsSceneController {
 
                 ObservableList<String> showForecastChoices = FXCollections.observableArrayList("Yes", "No");
                 showForecastChoiceBox.setItems(showForecastChoices);
+
+                ObservableList<String> rainfallUnitChoices = FXCollections.observableArrayList("in.", "mm.");
+                rainfallUnitChoiceBox.setItems(rainfallUnitChoices);
             }
             @FXML
             public void saveSettings() {
@@ -76,6 +83,7 @@ public class SettingsSceneController {
                 settings.setDistanceUnit(distanceChoiceBox.getValue());
                 settings.setWindSpeedUnit(windSpeedUnitChoiceBox.getValue());
                 settings.setShowForecast(showForecastChoiceBox.getValue());
+                settings.setRainfallUnit(rainfallUnitChoiceBox.getValue());
                 settings.saveSettings();
                 errorText.setText("Settings saved!");
             }

@@ -1,3 +1,7 @@
+.root {
+    -fx-font-family: "Veranda";
+}
+
 .button {
   -fx-background-color: linear-gradient(to bottom, #ffffff, #f2f2f2);
     -fx-background-radius: 5px;
@@ -14,6 +18,16 @@
   -fx-background-color: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
 }
 
+#weatherTile1, #weatherTile2, #weatherTile3, #weatherTile4{
+  -fx-cursor: hand;
+}
+
+#labelCity1Temp, #labelCity2Temp, #labelCity3Temp, #labelCity4Temp, #labelCity1, #labelCity2, #labelCity3, #labelCity4,
+ #labelRegion1, #labelRegion2, #labelRegion3, #labelRegion4 {
+  -fx-text-fill: #ffffff;
+
+}
+
 .button:pressed {
   -fx-background-color: linear-gradient(to bottom, #e6e6e6, #f2f2f2);
 }
@@ -23,7 +37,7 @@
   -fx-background-radius: 5px;
   -fx-background-insets: 0px;
   -fx-padding: 5px 10px;
-  -fx-font-size: 18px;
+  -fx-font-size: 15px;
   -fx-text-fill: #333333;
   -fx-border-color: #cccccc;
   -fx-border-radius: 5px;
@@ -42,18 +56,104 @@
   -fx-opacity: 0.5;
 }
 
+#regionExplore{
+  -fx-background-color: rgba(18, 30, 68, 0.7);
+}
+
 
 #vBoxForecastDay1, #vBoxForecastDay2, #vBoxForecastDay3 {
-  -fx-background-color: #ffffff;
+  -fx-background-color: rgba(18, 30, 68, 0.7);
   -fx-background-radius: 5px;
   -fx-background-insets: 0px;
   -fx-padding: 10px;
   -fx-spacing: 5px;
   -fx-border-color: #cccccc;
   -fx-border-radius: 5px;
-  -fx-border-width: 1px;
+  -fx-border-width: 2px;
   -fx-font-size: 16px;
-  -fx-text-fill: #333333;
+  -fx-text-fill: #ffffff;
+}
+
+#feelsLikeSP, #visibilitySP, #humiditySP, #windSP, #uvSP, #precipSP, #currentSP {
+    -fx-background-color: rgba(18, 30, 68, 0.7);
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0px;
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
+}
+
+#labelUV, #labelFeelsLike, #labelVisibility, #labelPrecip, #labelHumidity, #labelWindSpeed, #labelWindDir {
+  -fx-font-size: 32px;
+  -fx-text-fill: #ffffff;
+  -fx-font-weight: bold;
+}
+
+#uvIndexTitle, #feelsLikeTitle, #visibilityTitle, #precipitationTitle, #humidityTitle, #windTitle {
+  -fx-font-size: 16px;
+  -fx-text-fill: #ffffff;
+  -fx-font-weight: bold;
+}
+
+#labelHighDay1, #labelHighDay2, #labelHighDay3, #labelLowDay1, #labelLowDay2,
+#labelLowDay3, #labelAvgTempDay1, #labelAvgTempDay2, #labelAvgTempDay3, #labelAvgHumidityDay1, #labelAvgHumidityDay2,
+#labelAvgHumidityDay3, #labelAvgVisDay1, #labelAvgVisDay2, #labelAvgVisDay3, #labelChanceofRainDay1,
+#labelChanceofRainDay2, #labelChanceofRainDay3, #humidity0, #humidity100, #feelsLike0, #feelsLike120 {
+  -fx-font-size: 16px;
+  -fx-text-fill: #ffffff;
+}
+
+#labelDay1, #labelDay2, #labelDay3 {
+  -fx-font-size: 16px;
+  -fx-text-fill: #ffffff;
+  -fx-font-weight: bold;
+}
+
+#labelF{
+  -fx-font-size: 100px;
+  -fx-text-fill: #ffffff;
+}
+
+#labelCity {
+  -fx-font-size: 44px;
+  -fx-text-fill: #ffffff;
+}
+
+#labelRegion {
+  -fx-font-size: 34px;
+  -fx-text-fill: #ffffff;
+}
+
+#labelLastUpdated {
+  -fx-font-size: 12px;
+  -fx-text-fill: #ffffff;
+}
+
+#labelCondition{
+  -fx-font-size: 20px;
+  -fx-text-fill: #ffffff;
+  }
+
+#saveStatus{
+  -fx-font-size: 12px;
+  -fx-text-fill: #ffffff;
+}
+
+#anchorPaneFavorites, #anchorPaneExplore{
+-fx-background-color: #BFEFFF
 }
 
 
+#exploreTile1, #exploreTile2, #exploreTile3, #exploreTile4, #favoritesTile1, #favoritesTile2, #favoritesTile3,
+#favoritesTile4 {
+ -fx-background-color: rgba(18, 30, 68, 0.7);
+      -fx-background-radius: 5px;
+      -fx-background-insets: 0px;
+      -fx-padding: 10px;
+      -fx-spacing: 5px;
+      -fx-border-color: #cccccc;
+      -fx-border-radius: 5px;
+      -fx-border-width: 1px;
+}

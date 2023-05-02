@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -66,6 +67,15 @@ public class FavoritesSceneController {
     private ImageView iconCity3;
     @FXML
     private ImageView iconCity4;
+    @FXML
+    private StackPane favoritesTile1;
+    @FXML
+    private StackPane favoritesTile2;
+    @FXML
+    private StackPane favoritesTile3;
+    @FXML
+    private StackPane favoritesTile4;
+
     private Settings settings;
     private final SettingsReader settingsReader = new SettingsReader();
     
@@ -132,12 +142,16 @@ public class FavoritesSceneController {
                     this.labelCity1Temp.setText("");
                     this.iconCity1.setImage(null);
                     this.buttonDelete1.setVisible(false);
+                    this.favoritesTile1.setVisible(false);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }else{
             this.buttonDelete1.setVisible(false);
+            this.favoritesTile1.setVisible(false);
+
         }
 
         if (weatherDataList.size() >=2 && weatherDataList.get(1) != null) {
@@ -161,12 +175,16 @@ public class FavoritesSceneController {
                     this.labelCity2Temp.setText("");
                     this.iconCity2.setImage(null);
                     this.buttonDelete2.setVisible(false);
+                    this.favoritesTile2.setVisible(false);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }else{
             this.buttonDelete2.setVisible(false);
+            this.favoritesTile2.setVisible(false);
+
         }
 
         if (weatherDataList.size() >=3 && weatherDataList.get(2) != null) {
@@ -189,12 +207,16 @@ public class FavoritesSceneController {
                     this.labelCity3Temp.setText("");
                     this.iconCity3.setImage(null);
                     this.buttonDelete3.setVisible(false);
+                    this.favoritesTile3.setVisible(false);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }else{
             this.buttonDelete3.setVisible(false);
+            this.favoritesTile3.setVisible(false);
+
         }
 
         if (weatherDataList.size() >=4 && weatherDataList.get(3) != null) {
@@ -218,12 +240,14 @@ public class FavoritesSceneController {
                     this.labelCity4Temp.setText("");
                     this.iconCity4.setImage(null);
                     this.buttonDelete4.setVisible(false);
+                    this.favoritesTile4.setVisible(false);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }else{
             this.buttonDelete4.setVisible(false);
+            this.favoritesTile4.setVisible(false);
         }
     }
     private void removeKeywordFromFavoritesFile(String keywordToRemove) throws IOException {
@@ -234,14 +258,12 @@ public class FavoritesSceneController {
                 return;
             }
 
-            // Construct the new file that will later be renamed to the original filename.
             File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
 
             BufferedReader br = new BufferedReader(new FileReader("data/favorites.txt"));
             PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
 
             String line;
-            // Read each line from the file and compare it with the line to remove.
             while ((line = br.readLine()) != null) {
                 if (!line.trim().equals(keywordToRemove)) {
                     pw.println(line);
@@ -251,7 +273,6 @@ public class FavoritesSceneController {
             pw.close();
             br.close();
 
-            // Delete the original file and rename the new file to the original filename.
             if (!inFile.delete()) {
                 System.out.println("Could not delete file.");
                 return;
