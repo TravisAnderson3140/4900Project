@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -11,8 +12,7 @@
 
 <AnchorPane id="anchorPaneSettings" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../weather.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.SettingsSceneController">
    <children>
-      <Button layoutX="595.0" layoutY="34.0" mnemonicParsing="false" onAction="#switchToCurrentWeatherScene" text="Return Home" />
-      <StackPane id="stackPaneSettings" layoutX="150.0" layoutY="239.0" prefHeight="482.0" prefWidth="996.0">
+      <StackPane id="stackPaneSettings" layoutX="142.0" layoutY="250.0" prefHeight="460.0" prefWidth="996.0">
          <children>
             <VBox prefHeight="731.0" prefWidth="996.0">
                <children>
@@ -58,7 +58,10 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </ChoiceBox>
-                  <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="464.0" />
+                  <Text fx:id="errorText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="464.0">
+                     <VBox.margin>
+                        <Insets top="65.0" />
+                     </VBox.margin></Text>
                </children>
                <StackPane.margin>
                   <Insets left="100.0" top="40.0" />
@@ -110,11 +113,25 @@
                   <Insets left="550.0" top="40.0" />
                </StackPane.margin>
             </VBox>
-            <Button fx:id="buttonSave" mnemonicParsing="false" onAction="#saveSettings" text="Save" StackPane.alignment="BOTTOM_RIGHT">
+            <Button fx:id="buttonSave" mnemonicParsing="false" onAction="#saveSettings" prefHeight="30.0" prefWidth="100.0" text="Save" StackPane.alignment="BOTTOM_RIGHT">
                <StackPane.margin>
                   <Insets bottom="10.0" right="40.0" />
                </StackPane.margin>
             </Button>
+         </children>
+      </StackPane>
+      <StackPane id="stackPaneSettingsMenu" prefHeight="62.0" prefWidth="1280.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToCurrentWeatherScene" prefHeight="48.0" text="Return Home" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" />
+               </StackPane.margin>
+            </Button>
+            <Label text="Settings" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+               <StackPane.margin>
+                  <Insets left="20.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>

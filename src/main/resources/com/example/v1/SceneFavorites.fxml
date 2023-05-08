@@ -11,7 +11,6 @@
 
 <AnchorPane id="anchorPaneFavorites" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../weather.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.FavoritesSceneController">
    <children>
-      <Button layoutX="585.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToCurrentWeatherScene" text="Return Home" />
       <StackPane id="favoritesTile1" fx:id="favoritesTile1" layoutX="169.0" layoutY="192.0" prefHeight="245.0" prefWidth="420.0">
          <children>
             <VBox fx:id="weatherTile1" onMouseClicked="#expandWeather" prefHeight="177.0" prefWidth="234.0">
@@ -130,6 +129,20 @@
                <StackPane.margin>
                   <Insets right="20.0" top="20.0" />
                </StackPane.margin></ImageView>
+         </children>
+      </StackPane>
+      <StackPane id="stackPaneFavoritesMenu" prefHeight="62.0" prefWidth="1280.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToCurrentWeatherScene" prefHeight="48.0" text="Return Home" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" />
+               </StackPane.margin>
+            </Button>
+            <Label text="Favorites" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+               <StackPane.margin>
+                  <Insets left="20.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>

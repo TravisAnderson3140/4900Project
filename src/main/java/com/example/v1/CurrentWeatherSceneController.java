@@ -108,6 +108,10 @@ public class CurrentWeatherSceneController {
     @FXML
     private Label labelSaveStatus;
     @FXML
+    private Label labelSunrise;
+    @FXML
+    private Label labelSunset;
+    @FXML
     private Rectangle feelsLikeRectangle;
     @FXML
     private Rectangle humidityRectangle;
@@ -119,14 +123,24 @@ public class CurrentWeatherSceneController {
     private StackPane humiditySP;
     @FXML
     private StackPane windSP;
+    @FXML
+    private StackPane currentSP;
+    @FXML
+    private VBox vBoxCurrent1;
+    @FXML
+    private VBox vBoxCurrent2;
     private Settings settings;
     private final SettingsReader settingsReader = new SettingsReader();
     public void initialize() throws IOException, InterruptedException {
         this.settings = settingsReader.readSettings();
+
         this.getCurrentData(settings.getDefaultLocation());
         if (this.settings.getShowForecast().equals("Yes")) {
             this.getForecastData(settings.getDefaultLocation());
         }else{
+            currentSP.setLayoutY(250);
+            vBoxCurrent1.setLayoutY(250);
+            vBoxCurrent2.setLayoutY(250);
             this.vBoxForecastDay1.managedProperty().bind(vBoxForecastDay1.visibleProperty());
             this.vBoxForecastDay1.setVisible(false);
             this.vBoxForecastDay2.managedProperty().bind(vBoxForecastDay2.visibleProperty());
@@ -148,6 +162,9 @@ public class CurrentWeatherSceneController {
     }
 
     public void setForecast(WeatherForecast forecast){
+        labelSunrise.setText("Sunrise: " + forecast.getForecast().getForecastday().get(0).getAstro().getSunrise());
+        labelSunset.setText("Sunset: " + forecast.getForecast().getForecastday().get(0).getAstro().getSunset());
+
         Label[] dayLabels = {labelDay1, labelDay2, labelDay3 };
         ImageView[] dayIcons = {imageViewIconDay1, imageViewIconDay2, imageViewIconDay3 };
         Label[] highTempLabels = {labelHighDay1, labelHighDay2, labelHighDay3 };

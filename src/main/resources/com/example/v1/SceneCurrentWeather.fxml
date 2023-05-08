@@ -7,7 +7,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -15,13 +14,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../weather.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.v1.CurrentWeatherSceneController">
    <children>
       <ImageView fx:id="imageViewBackground" fitHeight="960.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1280.0">
-         <children>
-            <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#switchToFavoritesScene" prefHeight="101.0" prefWidth="107.0" text="Favorites" />
-            <Button fx:id="buttonExplore" mnemonicParsing="false" onAction="#switchToExploreScene" prefHeight="101.0" prefWidth="107.0" text="Explore" />
-            <Button fx:id="buttonSettings" mnemonicParsing="false" onAction="#switchToSettingsScene" prefHeight="101.0" prefWidth="107.0" text="Settings" />
-         </children>
-      </HBox>
       <VBox fx:id="vBoxForecastDay1" layoutX="310.0" layoutY="629.0" prefHeight="173.0" prefWidth="200.0" stylesheets="@../../../weather.css">
          <children>
             <ImageView fx:id="imageViewIconDay1" fitHeight="70.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
@@ -76,7 +68,7 @@
             <Label fx:id="labelChanceofRainDay3" text="Chance of Rain:" />
          </children>
       </VBox>
-      <VBox layoutX="971.0" layoutY="100.0" prefHeight="490.0" prefWidth="175.0">
+      <VBox fx:id="vBoxCurrent2" layoutX="971.0" layoutY="100.0" prefHeight="490.0" prefWidth="175.0">
          <children>
             <StackPane fx:id="feelsLikeSP" prefHeight="150.0" prefWidth="175.0">
                <children>
@@ -159,7 +151,7 @@
             </StackPane>
          </children>
       </VBox>
-      <VBox layoutX="762.0" layoutY="100.0" prefHeight="490.0" prefWidth="175.0">
+      <VBox fx:id="vBoxCurrent1" layoutX="762.0" layoutY="100.0" prefHeight="490.0" prefWidth="175.0">
          <children>
             <StackPane fx:id="uvSP" prefHeight="150.0" prefWidth="175.0">
                <children>
@@ -280,6 +272,37 @@
                <StackPane.margin>
                   <Insets bottom="150.0" />
                </StackPane.margin></ImageView>
+            <Label fx:id="labelSunrise" text="Sunrise: 10:09AM" textFill="WHITE" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets right="175.0" top="220.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="labelSunset" text="Sunset: 10:09AM" textFill="WHITE">
+               <StackPane.margin>
+                  <Insets left="175.0" top="220.0" />
+               </StackPane.margin>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane id="stackPaneCurrentWeatherMenu" prefHeight="62.0" prefWidth="1280.0">
+         <children>
+            <Button fx:id="buttonSettings" mnemonicParsing="false" onAction="#switchToSettingsScene" prefHeight="48.0" prefWidth="100.0" text="Settings" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="20.0" />
+               </StackPane.margin></Button>
+            <Button fx:id="buttonExplore" mnemonicParsing="false" onAction="#switchToExploreScene" prefHeight="48.0" prefWidth="100.0" text="Explore" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="120.0" />
+               </StackPane.margin></Button>
+            <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#switchToFavoritesScene" prefHeight="48.0" prefWidth="100.0" text="Favorites" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="220.0" />
+               </StackPane.margin></Button>
+            <Label text="Home" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+               <StackPane.margin>
+                  <Insets left="20.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>
