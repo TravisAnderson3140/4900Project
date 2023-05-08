@@ -72,7 +72,7 @@ public class ExploreSceneController {
     }
     @FXML
     private void switchToCurrentWeatherScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(WetherApplication.class.getResource("SceneCurrentWeather.fxml"));
+        root = FXMLLoader.load(WeatherApplication.class.getResource("SceneCurrentWeather.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add("weather.css");

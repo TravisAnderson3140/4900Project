@@ -268,7 +268,7 @@ public class CurrentWeatherSceneController {
     }
     @FXML
     private void switchToExploreScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneExplore.fxml"));
+        Parent root = FXMLLoader.load(WeatherApplication.class.getResource("SceneExplore.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add("weather.css");
@@ -277,7 +277,7 @@ public class CurrentWeatherSceneController {
     }
     @FXML
     private void switchToFavoritesScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneFavorites.fxml"));
+        Parent root = FXMLLoader.load(WeatherApplication.class.getResource("SceneFavorites.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add("weather.css");
@@ -286,7 +286,7 @@ public class CurrentWeatherSceneController {
     }
     @FXML
     private void switchToSettingsScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(WetherApplication.class.getResource("SceneSettings.fxml"));
+        Parent root = FXMLLoader.load(WeatherApplication.class.getResource("SceneSettings.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add("weather.css");

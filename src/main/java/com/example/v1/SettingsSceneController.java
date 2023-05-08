@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -91,7 +90,7 @@ public class SettingsSceneController {
 
     @FXML
     private void switchToCurrentWeatherScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(WetherApplication.class.getResource("SceneCurrentWeather.fxml"));
+        root = FXMLLoader.load(WeatherApplication.class.getResource("SceneCurrentWeather.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add("weather.css");
